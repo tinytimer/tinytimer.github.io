@@ -27,39 +27,45 @@ webfont swapped for a system stack.
 
 `../tiny-timer-site` is kept only as the content's provenance. Nothing here depends on it.
 
-## Publishing on GitHub Pages
+## Live at
 
-This repo must be **public** — GitHub Pages on a private repo requires a paid plan.
-It contains no secrets.
+**https://tinytimer.github.io/**
 
-1. Publish this folder as a public GitHub repo (GitHub Desktop: Add local repository →
-   Publish, with "Keep this code private" **unchecked**).
-2. In the repo on github.com: **Settings → Pages**.
-3. Source: **Deploy from a branch**. Branch: `main`, folder: `/ (root)`. Save.
-4. Wait ~1 minute. The site appears at
-   `https://<username>.github.io/<repo-name>/`
+Published via GitHub Pages from `main` / `/ (root)`, in the GitHub org `tinytimer`
+(owned by THE FLOCO COMPANY, LLC). The repo is named `tinytimer.github.io` — matching the
+org name exactly — which is what makes GitHub serve it at the root rather than at a
+`/repo-name/` subpath. **Renaming this repo would move the site and break the URLs
+compiled into the shipped app.**
 
-All internal links are relative, so the site works both at a repo subpath and at a
-domain root — no rebuild needed if you later add a custom domain.
+The repo must stay **public**; GitHub Pages on a private repo requires a paid plan. It
+contains no secrets. `.nojekyll` is present so GitHub serves the files as-is.
 
-`.nojekyll` is present so GitHub serves the files as-is.
+The local folder is still named `tiny-timer-web` — that mismatch is harmless and only
+affects what GitHub Desktop displays.
 
-## Wiring the URLs into the app
+## URLs in use
 
-Once the Pages URL is live, set both constants in the app's `src/constants/legal.ts`:
+| Where | URL |
+| --- | --- |
+| `PRIVACY_URL` in the app's `src/constants/legal.ts` | https://tinytimer.github.io/privacy/ |
+| `TERMS_URL` in the app's `src/constants/legal.ts` | https://tinytimer.github.io/terms/ |
+| App Store Connect — Privacy Policy URL | https://tinytimer.github.io/privacy/ |
+| App Store Connect — Support URL | https://tinytimer.github.io/support/ |
 
-```ts
-export const TERMS_URL = 'https://<username>.github.io/<repo-name>/terms/';
-export const PRIVACY_URL = 'https://<username>.github.io/<repo-name>/privacy/';
-```
-
-Then use the same Support and Privacy Policy URLs in App Store Connect.
+Trailing slashes are intentional: these are directory indexes, so omitting them costs a
+redirect hop.
 
 ## Adding a custom domain later
 
-If you register `tinytimer.app`, add it under Settings → Pages → Custom domain and point
-DNS at GitHub. Update `legal.ts` and App Store Connect to the new URLs. Keep the old
-Pages URL reachable until an app build carrying the new links is live.
+All internal links are relative, so the site already works at any base path — moving to a
+custom domain needs no file changes.
+
+If you register `tinytimer.app`: Settings → Pages → Custom domain, point DNS at GitHub,
+and enable Enforce HTTPS (`.app` is HSTS-preloaded, so HTTPS is mandatory). Then update
+`legal.ts` and App Store Connect.
+
+Keep `tinytimer.github.io` reachable until an app build carrying the new links has
+shipped and users have updated — the old URLs stay live in every installed copy.
 
 ## Editing
 
