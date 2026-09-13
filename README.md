@@ -1,4 +1,4 @@
-# Tiny Timer — public support & legal pages
+# All done! — public support & legal pages
 
 Static site serving the three URLs Apple requires for App Store submission, plus a
 landing page:
