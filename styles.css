@@ -16,6 +16,8 @@
   --blush-soft: #fff0f1;
   --green: #98dc67;
   --green-soft: #eef9e7;
+  --brand-pink: #fe7e9c;
+  --brand-green: #7cd061;
   --border: #dbe8eb;
   --shadow: 0 18px 55px rgba(24, 57, 68, 0.10);
   --radius-lg: 34px;
@@ -34,10 +36,16 @@ a { color: inherit; }
 .site-header { position: sticky; top: 0; z-index: 20; background: rgba(255,253,248,.92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(219,232,235,.85); }
 .header-inner { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; font-weight: 900; font-size: 22px; letter-spacing: -.6px; }
-.brand-mark { display: inline-flex; width: 42px; height: 42px; overflow: hidden; border-radius: 50%; flex: 0 0 auto; }
-.brand-half { width: 50%; height: 100%; }
-.brand-half-blush { background: var(--blush); }
-.brand-half-green { background: var(--green); }
+/* The mark is a split ring, matching the app icon. The hole is masked rather than
+   painted so it stays transparent — this mark sits on cream in the header and on
+   blush inside .timer-badge, and a painted hole would be wrong in one of them.
+   The gap is a percentage so it scales with the three sizes this is used at. */
+.brand-mark { display: inline-flex; gap: 5%; width: 42px; height: 42px; overflow: hidden; border-radius: 50%; flex: 0 0 auto;
+  -webkit-mask: radial-gradient(circle closest-side, #0000 60%, #000 60.5%);
+  mask: radial-gradient(circle closest-side, #0000 60%, #000 60.5%); }
+.brand-half { flex: 1; height: 100%; }
+.brand-half-blush { background: var(--brand-pink); }
+.brand-half-green { background: var(--brand-green); }
 .main-nav { display: flex; align-items: center; gap: 28px; }
 .main-nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 750; }
 .main-nav a:hover, .main-nav a:focus-visible { color: var(--sky-deep); }
